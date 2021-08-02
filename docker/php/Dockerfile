@@ -3,7 +3,7 @@ FROM docker.io/bitnami/php-fpm:7.4-debian-10
 RUN echo "opcache.revalidate_freq = 0" >> /opt/bitnami/php/etc/php.ini
 
 RUN apt-get update
-RUN apt-get install nano
+RUN apt-get install -y nano
 
 ARG PUID=1000
 ENV PUID ${PUID}
@@ -25,6 +25,7 @@ RUN chown ${PUID}:${PGID} /app
 
 USER ${PUID}:${PGID}
 
-RUN curl -s https://octobercms.com/api/installer | php
+RUN composer create-project wintercms/winter /app
+#RUN php artisan winter:install
 
 EXPOSE 9000

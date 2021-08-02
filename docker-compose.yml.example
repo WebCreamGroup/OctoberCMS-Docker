@@ -10,8 +10,8 @@ volumes:
 
 services:
 
-### App service
-  app:
+### WinterCMS service
+  wintercms:
     build:
       context: ./docker/php/
       args:
@@ -34,7 +34,7 @@ services:
       - ./docker/apache/vhost.conf:/vhosts/custom-vhost.conf:ro
       - disk:/app
     depends_on:
-      - app
+      - wintercms
     networks:
       - main
 
